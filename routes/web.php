@@ -22,7 +22,6 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/event_update', [EventController::class, 'edit'])->name('event.edit');
     Route::patch('/event_update', [EventController::class, 'update'])->name('event.update');
-
 });
 
 

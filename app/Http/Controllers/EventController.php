@@ -23,11 +23,19 @@ class EventController extends Controller
             'user' => $request->user(),
         ]);
     }
+
+
+
+
+
+
     public function update(EventUpdate $request): RedirectResponse
     {
+        Log::info($request);
         $request->user()->fill($request->validated());
-
         Log::info($request->validated());
+
+
 
         if ($request->user()->isDirty('email')) {
             //insert into database
@@ -35,7 +43,7 @@ class EventController extends Controller
         }
 
         $request->user()->save();
-
+//        return Redirect::route('/')->with('status', 'event-updated');
         return Redirect::route('event.edit')->with('status', 'event-updated');
     }
 }

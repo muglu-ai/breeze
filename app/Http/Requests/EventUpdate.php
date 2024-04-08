@@ -24,9 +24,9 @@ class EventUpdate extends FormRequest
         return [
             //
             'event_name' => ['required', 'string', 'max:255'],
-            'event_web' => ['required', 'string', 'max:255'],
-            'event_year' => ['required', 'string', 'max:255'],
-            'no_of_exhibitors' => ['required', 'string', 'max:255'],
+            'event_website' => ['required', 'string', 'max:255'],
+            'event_year' => ['required', 'string', 'max:25'],
+            'no_of_exhibitors' => ['required', 'string', 'max:12'],
         ];
     }
 }
