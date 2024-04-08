@@ -18,13 +18,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+{{--                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">--}}
+{{--                    <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile')">--}}
+{{--                        {{ __('Profile') }}--}}
+{{--                    </x-nav-link>--}}
+{{--                </div>--}}
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile')">
-                        {{ __('Profile') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('event.edit')" :active="request()->routeIs('event_details')">
+                    <x-nav-link :href="route('event.edit')" :active="request()->routeIs('event_update')">
                         {{ __('Event Information') }}
                     </x-nav-link>
                 </div>
@@ -83,7 +83,21 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
-
+{{--        <div class="pt-2 pb-3 space-y-1">--}}
+{{--            <x-responsive-nav-link :href="route('profile.edit')">--}}
+{{--                {{ __('Profile') }}--}}
+{{--            </x-responsive-nav-link>--}}
+{{--        </div>--}}
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('event.edit')" :active="request()->routeIs('event_details')">
+                {{ __('Event Information') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <x-responsive-nav-link :href="route('event.edit')" :active="request()->routeIs('event_details')">
+                {{ __('Event Information') }}
+            </x-responsive-nav-link>
+        </div>
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">

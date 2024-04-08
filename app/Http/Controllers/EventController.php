@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Faker\Core\DateTime;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 use App\Http\Requests\EventUpdate;
 use Illuminate\Http\RedirectResponse;
@@ -31,19 +34,23 @@ class EventController extends Controller
 
     public function update(EventUpdate $request): RedirectResponse
     {
-        Log::info($request);
         $request->user()->fill($request->validated());
-        Log::info($request->validated());
-
-
-
         if ($request->user()->isDirty('email')) {
             //insert into database
             $request->user()->email_verified_at = "25/02/2024";
         }
 
+        //update database with new values
+        $request->user()->email_verified_at = now();
         $request->user()->save();
-//        return Redirect::route('/')->with('status', 'event-updated');
+
+        //Create tables specific to the event in the database
+
+        $eventName = $request->user()->event_name;
+        $eventYear = $request->user()->event_year;
+        $request->user()->createTables($eventName, $eventYear);
+
+        //return Redirect::route('/')->with('status', 'event-updated');
         return Redirect::route('event.edit')->with('status', 'event-updated');
     }
 }
