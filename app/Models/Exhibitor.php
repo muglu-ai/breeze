@@ -16,7 +16,6 @@ class Exhibitor extends Model
         'exhibitor_name',
         'cp_title',
         'cp_fname',
-        'cp_mname',
         'cp_lname',
         'cp_desig',
         'cntry_code_mobile',

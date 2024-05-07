@@ -45,7 +45,6 @@ class EventController extends Controller
         $request->user()->save();
 
         //Create tables specific to the event in the database
-
         $eventName = $request->user()->event_name;
         $eventYear = $request->user()->event_year;
         $request->user()->createTables($eventName, $eventYear);

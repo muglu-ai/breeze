@@ -25,8 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/event_update', [EventController::class, 'update'])->name('event.update');
 });
 
-Route::get('/newExhibitor', [FormController::class, 'form'])->name('exhibitor.create');
-
-
-
 require __DIR__.'/auth.php';
+Route::middleware('guest')->group(function () {
+    Route::get('/newExhibitor', [FormController::class, 'form'])->name('exhibitor.create');
+    Route::post('/newExhibitorStore', [FormController::class, 'submit'])->name('exhibitor.submit');
+}); 

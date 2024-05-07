@@ -99,6 +99,11 @@ return [
         ],
     ],
 
+    'providers' => [
+        // Other Service Providers
+        Mews\Captcha\CaptchaServiceProvider::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout

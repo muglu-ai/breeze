@@ -49,34 +49,59 @@
         </div>
         <div>
             <x-input-label for="event_name" :value="__('Event Name')" />
-            <x-text-input id="event_name" name="event_name" type="text" class="mt-1 block w-full" :value="old('event_name', $user->event_name)" required autofocus autocomplete="event_name" />
+            @if ($user->no_of_exhibitors)
+            <x-text-input id="event_name" name="event_name" type="text" class="mt-1 block w-full" :value="old('event_name', $user->event_name)" required autofocus autocomplete="event_name" readonly />
+            @else
+            <x-text-input id="event_name" name="event_name" type="text" class="mt-1 block w-full" :value="old('event_name', $user->event_name)" required autofocus autocomplete="event_name"  />
             <x-input-error class="mt-2" :messages="$errors->get('event_name')" />
+            @endif
         </div>
         <div>
-            <x-input-label for="event_website" :value="__('Event Website')" />
-            <x-text-input id="event_website" name="event_website" type="text" class="mt-1 block w-full" :value="old('event_website', $user->event_website)" required autofocus autocomplete="event_website" />
+            <x-input-label for="event_website" :value="__('Event Website')" /> @if ($user->no_of_exhibitors)
+            <x-text-input id="event_website" name="event_website" type="text" class="mt-1 block w-full" :value="old('event_website', $user->event_website)" required autofocus autocomplete="event_website" readonly />
+             @else
+             <x-text-input id="event_website" name="event_website" type="text" class="mt-1 block w-full" :value="old('event_website', $user->event_website)" required autofocus autocomplete="event_website" />
+             @endif 
             <x-input-error class="mt-2" :messages="$errors->get('event_website')" />
         </div>
         <div>
             <x-input-label for="event_year" :value="__('Event Year')" />
-            <x-text-input id="event_year" name="event_year" type="text" class="mt-1 block w-full" :value="old('event_year', $user->event_year)" required autofocus autocomplete="event_year" />
-            <x-input-error class="mt-2" :messages="$errors->get('event_year')" />
+             @if ($user->no_of_exhibitors)
+            <x-text-input id="event_year" name="event_year" type="text" class="mt-1 block w-full" :value="old('event_year', $user->event_year)" required autofocus autocomplete="event_year" readonly />
+             @else
+             <x-text-input id="event_year" name="event_year" type="text" class="mt-1 block w-full" :value="old('event_year', $user->event_year)" required autofocus autocomplete="event_year" />
+              @endif
+              <x-input-error class="mt-2" :messages="$errors->get('event_year')" />
         </div>
 
         <div>
             <x-input-label for="no_of_exhibitors" :value="__('No Of Exhibitors')" />
-            <select id="no_of_exhibitors" name="no_of_exhibitors" class="mt-1 block w-full">
-                <option value="500" {{ old('no_of_exhibitors', $user->no_of_exhibitors) == 500 ? 'selected' : '' }}>500</option>
-                <option value="1000" {{ old('no_of_exhibitors', $user->no_of_exhibitors) == 1000 ? 'selected' : '' }}>1000</option>
-                <option value="1500" {{ old('no_of_exhibitors', $user->no_of_exhibitors) == 1500 ? 'selected' : '' }}>1500</option>
-                <!-- Add more options as needed -->
+            @if ($user->no_of_exhibitors)
+                <select id="no_of_exhibitors" name="no_of_exhibitors" class="mt-1 block w-full" disabled>
+                    <option value="500" {{ old('no_of_exhibitors', $user->no_of_exhibitors) == 500 ? 'selected' : '' }}>500</option>
+                    <option value="1000" {{ old('no_of_exhibitors', $user->no_of_exhibitors) == 1000 ? 'selected' : '' }}>1000</option>
+                    <option value="1500" {{ old('no_of_exhibitors', $user->no_of_exhibitors) == 1500 ? 'selected' : '' }}>1500</option>
+                    <!-- Add more options as needed -->
+                </select>
+            @else
+                <select id="no_of_exhibitors" name="no_of_exhibitors" class="mt-1 block w-full">
+                    <option value="500" {{ old('no_of_exhibitors', $user->no_of_exhibitors) == 500 ? 'selected' : '' }}>500</option>
+                    <option value="1000" {{ old('no_of_exhibitors', $user->no_of_exhibitors) == 1000 ? 'selected' : '' }}>1000</option>
+                    <option value="1500" {{ old('no_of_exhibitors', $user->no_of_exhibitors) == 1500 ? 'selected' : '' }}>1500</option>
+                    <!-- Add more options as needed -->
+                </select>
+            @endif
             </select>
             <x-input-error class="mt-2" :messages="$errors->get('no_of_exhibitors')" />
         </div>
 
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            @if ($user->no_of_exhibitors)
+                {{-- <x-primary-button disabled>{{ __('Save') }}</x-primary-button> --}}
+            @else
+                <x-primary-button>{{ __('Save') }}</x-primary-button>
+            @endif
 
             @if (session('status') === 'profile-updated')
             <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600 dark:text-gray-400">{{ __('Saved.') }}</p>

@@ -1,4 +1,4 @@
-@include('layouts.formheader')
+@include('layouts.formheader')  
 @include('layouts.form_navbar')
 
 <div class="isolate bg-white px-6 py-24 sm:py-32 lg:px-8" style="
@@ -9,8 +9,10 @@
         </div>
 
     </div>
-    <form action="#" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20" style="
+    
+    <form action="{{ route('exhibitor.submit') }}" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20" style="
         margin-top: 20px;">
+         @csrf
         <div class="sm:col-span-2">
             <label for="exhibitor_name" class="block text-sm font-semibold leading-6 text-gray-900">Name of the Exhibitor</label>
             <div class="mt-2.5">
@@ -46,24 +48,24 @@
             <div>
                 <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">First name</label>
                 <div class="mt-2.5">
-                    <input type="text" name="first-name" id="first-name" placeholder="First Name" autocomplete="given-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <input type="text" name="first_name" id="first_name" placeholder="First Name" autocomplete="first_name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
             </div>
             <div>
-                <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Last name</label>
+                <label for="last_name" class="block text-sm font-semibold leading-6 text-gray-900">Last name</label>
                 <div class="mt-2.5">
-                    <input type="text" name="last-name" id="last-name" placeholder="Last Name" autocomplete="family-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <input type="text" name="last_name" id="last_name" placeholder="Last Name" autocomplete="family-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
             </div>
         </div>
         <br>
-        <div class="sm:col-span-2">
+        {{-- <div class="sm:col-span-2">
             <label for="cp_design" class="block text-sm font-semibold leading-6 text-gray-900">Contact Person Designation *</label>
             <div class="mt-2.5">
                 <input type="text" name="cp_design" id="cp_design" autocomplete="cp_design" placeholder="Contact Person Designation" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
             </div>
         </div>
-        <br>
+        <br> --}}
         <div class="sm:col-span-2">
             <label for="cp_design" class="block text-sm font-semibold leading-6 text-gray-900">Contact Person Designation *</label>
             <div class="mt-2.5">
@@ -101,7 +103,7 @@
                             <option value="{{ $country }}">{{ $country }}</option>
                         @endforeach
                     </select>
-{{--                    <x-country-flags :countries="$countries" />--}}
+
 
                 </div>
             </div>
@@ -113,6 +115,7 @@
                 </div>
         </div>
         </div>
+        <br>
 
         <div class="sm:col-span-2">
                 <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
@@ -122,7 +125,7 @@
             </div>
         <br>
         <div class="sm:col-span-2">
-                <label for="phone-number" class="block text-sm font-semibold leading-6 text-gray-900">Phone number</label>
+                <label for="con_number" class="block text-sm font-semibold leading-6 text-gray-900">Contact number</label>
                 <div class="relative mt-2.5">
                     <div class="absolute inset-y-0 left-0 flex items-center">
                         <label for="country" class="sr-only">Country</label>
@@ -137,7 +140,7 @@
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input type="tel" name="phone-number" id="phone-number" autocomplete="tel" class="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <input type="tel" name="con_number" id="con_number" autocomplete="tel" class="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
             </div>
         <br>
@@ -148,22 +151,27 @@
                 </div>
             </div>
         <br>
+          {{-- @csrf --}}
+    {{-- <img src="{{ captcha_src('default') }}" alt="captcha">
+    <input type="text" name="captcha"> --}}
+    <br>
             <div class="flex gap-x-4 sm:col-span-2">
                 <div class="flex h-6 items-center">
                     <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
-                    <button type="button" class="bg-indigo-600 flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" role="switch" aria-checked="false" aria-labelledby="switch-1-label">
+                    {{-- <button type="button" class="bg-indigo-600 flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" role="switch" aria-checked="false" aria-labelledby="switch-1-label">
                         <span class="sr-only">Agree to policies</span>
                         <!-- Enabled: "translate-x-3.5", Not Enabled: "translate-x-0" -->
                         <span aria-hidden="true" class="translate-x-3.5 h-4 w-4 transform rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition duration-200 ease-in-out"></span>
-                    </button>
+                    </button> --}}
                 </div>
+
                 <label class="text-sm leading-6 text-gray-600" id="switch-1-label">
                     By selecting this, you agree to our
                     <a href="#" class="font-semibold text-indigo-600">privacy&nbsp;policy</a>.
                 </label>
             </div>
         <div class="mt-10">
-            <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Let's talk</button>
+            <button type="submit" class="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Next</button>
         </div>
     </form>
 </div>
