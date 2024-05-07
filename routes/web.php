@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EventController;
 
@@ -23,6 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/event_update', [EventController::class, 'edit'])->name('event.edit');
     Route::patch('/event_update', [EventController::class, 'update'])->name('event.update');
 });
+
+Route::get('/newExhibitor', [FormController::class, 'form'])->name('exhibitor.create');
+
 
 
 require __DIR__.'/auth.php';

@@ -28,6 +28,7 @@
                         {{ __('Event Information') }}
                     </x-nav-link>
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->
